@@ -1,6 +1,7 @@
 package com.android.coolweather.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.coolweather.R;
+import com.android.coolweather.WeatherActivity;
 import com.android.coolweather.db.City;
 import com.android.coolweather.db.County;
 import com.android.coolweather.db.Province;
@@ -109,6 +111,12 @@ public class ChooseAreaFragment extends Fragment {
                 }else if(currentLEVEL == LEVEL_CITY){
                     selectedCity = cityList.get(position);
                     queryCounties();
+                }else if(currentLEVEL == LEVEL_COUNTY){
+                    String weatherId = countyList.get(position).getWeatherId();
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id", weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
